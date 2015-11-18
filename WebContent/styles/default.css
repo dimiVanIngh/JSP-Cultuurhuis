@@ -71,6 +71,12 @@ nav li {
 	display: inline;
 }
 
+li a {
+	font-weight: bold;
+	padding-left: 0.5em;
+	vertical-align: middle;
+}
+
 nav li a {
 	color: blue;
 	font-weight: bold;
@@ -99,4 +105,9 @@ ul.zebra li:nth-child(even) {
 
 ul.zebra li:nth-child(odd):hover, ul.zebra li:nth-child(even):hover {
 	background-color: #ccff00;
+}
+
+#cultuur{
+	width: 100px;
+	height: 100px;
 }

@@ -2,17 +2,17 @@ package be.vdab.entities;
 
 public class Genre {
 	
-	private long id;
+	private int id;
 	private String naam;
 		
-	public Genre(long id, String naam) {
+	public Genre(int id, String naam) {
 		this.id = id;
 		this.naam = naam;
 	}
-	public long getId() {
+	public int getId() {
 		return id;
 	}
-	public void setId(long id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 	public String getNaam() {
