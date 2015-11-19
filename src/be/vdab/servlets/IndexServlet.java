@@ -27,10 +27,11 @@ public class IndexServlet extends HttpServlet {
 		voorstellingDAO.setDataSource(dataSource);
 	}
 	
+	//TODO parseLong checken input -> string error
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setAttribute("genres", genreDAO.findAll());
 		if(request.getParameter("id") != null){
-			request.setAttribute("voorstellingen", voorstellingDAO.findAllById(Integer.parseInt(request.getParameter("id"))));
+			request.setAttribute("voorstellingen", voorstellingDAO.findAllById(Long.parseLong(request.getParameter("id"))));
 		}
 		request.getRequestDispatcher(VIEW).forward(request, response);
 	}

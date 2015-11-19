@@ -5,7 +5,7 @@ import java.util.Date;
 
 public class Voorstelling {
 
-	private int id;
+	private long id;
 	private String titel;
 	private String uitvoerders;
 	private BigDecimal prijs;
@@ -14,7 +14,7 @@ public class Voorstelling {
 	private Date datum;
 	
 	
-	public Voorstelling(int id, String titel, String uitvoerders, Date datum, BigDecimal prijs, int vrijePlaatsen, Genre genre) {
+	public Voorstelling(long id, String titel, String uitvoerders, Date datum, BigDecimal prijs, int vrijePlaatsen, Genre genre) {
 		this.id = id;
 		this.titel = titel;
 		this.uitvoerders = uitvoerders;
@@ -24,7 +24,7 @@ public class Voorstelling {
 		this.datum = datum;
 	}
 		
-	public Voorstelling(int id, String titel, String uitvoerders, Date datum, BigDecimal prijs, int vrijePlaatsen) {
+	public Voorstelling(long id, String titel, String uitvoerders, Date datum, BigDecimal prijs, int vrijePlaatsen) {
 
 		this.id = id;
 		this.titel = titel;
@@ -34,10 +34,10 @@ public class Voorstelling {
 		this.datum = datum;
 	}
 
-	public int getId() {
+	public long getId() {
 		return id;
 	}
-	public void setId(int id) {
+	public void setId(long id) {
 		this.id = id;
 	}
 	public String getTitel() {

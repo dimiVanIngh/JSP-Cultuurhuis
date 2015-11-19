@@ -27,10 +27,10 @@ public class GenreDAO extends AbstractDAO {
 			throw new DAOException(ex);
 		}
 	}
-	public Genre findById(int id){
+	public Genre findById(long id){
 		try (Connection connection = dataSource.getConnection();
 				PreparedStatement statement = connection.prepareStatement(FIND_BY_ID)) {
-			statement.setInt(1, id);
+			statement.setLong(1, id);
 			try(ResultSet resultSet = statement.executeQuery()) {
 				return resultSetRijNaarGenre(resultSet);
 			}
@@ -40,6 +40,6 @@ public class GenreDAO extends AbstractDAO {
 	}
 
 	private Genre resultSetRijNaarGenre(ResultSet resultSet) throws SQLException {
-		return new Genre(resultSet.getInt("id"), resultSet.getString("naam"));
+		return new Genre(resultSet.getLong("id"), resultSet.getString("naam"));
 	}
 }
