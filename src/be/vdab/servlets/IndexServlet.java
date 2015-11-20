@@ -1,6 +1,7 @@
 package be.vdab.servlets;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.annotation.Resource;
 import javax.servlet.ServletException;
@@ -12,6 +13,7 @@ import javax.sql.DataSource;
 
 import be.vdab.dao.GenreDAO;
 import be.vdab.dao.VoorstellingDAO;
+import be.vdab.entities.Voorstelling;
 
 @WebServlet("/index.htm")
 public class IndexServlet extends HttpServlet {
@@ -26,12 +28,24 @@ public class IndexServlet extends HttpServlet {
 		genreDAO.setDataSource(dataSource);
 		voorstellingDAO.setDataSource(dataSource);
 	}
-	
-	//TODO parseLong checken input -> string error
+
+	@SuppressWarnings("unchecked")
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setAttribute("genres", genreDAO.findAll());
-		if(request.getParameter("id") != null){
-			request.setAttribute("voorstellingen", voorstellingDAO.findAllById(Long.parseLong(request.getParameter("id"))));
+		if (request.getParameter("id") != null) {
+			try {
+				long id = Long.parseLong(request.getParameter("id"));
+				try {
+					request.setAttribute("voorstellingen", voorstellingDAO.findAllById(id));
+					if(((ArrayList<Voorstelling>) request.getAttribute("voorstellingen")).isEmpty()){
+						request.setAttribute("leeg", true);
+					}
+				} catch (Exception ex) {
+					request.setAttribute("fout", "Er is een probleem met de database, probeer het later eens opnieuw.");
+				}
+			} catch (Exception ex) {
+				request.setAttribute("fout", "Er werd geen geldig id meegegeven.");
+			}
 		}
 		request.getRequestDispatcher(VIEW).forward(request, response);
 	}

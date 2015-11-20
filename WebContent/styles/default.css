@@ -67,6 +67,14 @@ nav ul {
 	padding: 0.4em 0;
 }
 
+#horizontal_menu{
+	padding: 0.4em 0;
+}
+
+#horizontal_menu li{
+	display: inline;
+}
+
 nav li {
 	display: inline;
 }

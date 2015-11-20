@@ -10,5 +10,6 @@
     <h1>Pagina niet gevonden</h1>
     <img src='<c:url value="/images/fout.jpg"/>' alt='fout'>
     <p>De pagina die u zocht bestaat niet op onze website.</p>
+    <p><a href="<c:url value="/index.htm"/>">Keer terug naar de homepagina</a></p>
   </body>
 </html> 

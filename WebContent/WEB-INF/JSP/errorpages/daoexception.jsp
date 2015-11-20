@@ -12,5 +12,6 @@
     <p>We kunnen de gevraagde data niet ophalen 
        wegens een technische storing.<br>
        Gelieve de helpdesk te contacteren.</p>
+       <p><a href="<c:url value="/index.htm"/>">Keer terug naar de homepagina</a></p>
   </body>
 </html>
