@@ -20,7 +20,7 @@
         <div class='fout'>${fout}</div>        
       </c:when>
       <c:when test="${empty voorstelling}">
-        <div class='fout'>Voorstelling niet gevonden</div>
+        <div class='fout'>Geen voorstelling gevonden</div>
       </c:when> 
       <c:otherwise>
         <dl>
@@ -32,8 +32,9 @@
         </dl>
         <form method="post" id="reservatieForm">
        		<label>Plaatsen:<span>${fouten.van}</span>
-      		<input name='plaatsen' type="number" min="1" max="${voorstelling.vrijePlaatsen}" autofocus required></label>
-        	<input type="submit" value="Reserveren" id="reservatieKnop">
+      		<input name='plaatsen' type="number" min="1" max="${voorstelling.vrijePlaatsen}" autofocus required /></label>
+      		<input name="voorstellingid" type="hidden" type="number" value="${voorstelling.id}" />
+        	<input type="submit" value="Reserveren" id="reservatieKnop" />
         </form>
       </c:otherwise>
     </c:choose>

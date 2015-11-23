@@ -19,7 +19,7 @@ public class Validator {
 	public static boolean isMinLenth(String input, int length){
 		return (input.length() >= length);
 	}
-	public static boolean isNumber(String input){
+	public static boolean isInteger(String input){
 		boolean valid = true;
 		char[] charArray = input.toCharArray();
 		for(int i = 0 ; i< charArray.length | !valid ; i++){

@@ -1,6 +1,8 @@
 package be.vdab.servlets;
 
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.servlet.ServletException;
@@ -18,6 +20,7 @@ import be.vdab.dao.VoorstellingDAO;
 public class ReserverenServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private static final String VIEW = "/WEB-INF/JSP/reserveren.jsp";
+	private static final String REDIRECT_URL = "%s/winkelmandje.htm";
 
 	private final transient VoorstellingDAO voorstellingDAO = new VoorstellingDAO();
 
@@ -45,8 +48,13 @@ public class ReserverenServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 			try {
 				int plaatsen = Integer.parseInt(request.getParameter("plaatsen"));
-				HttpSession session = request.getSession();
-				
+				long id = Long.parseLong(request.getParameter("voorstellingid"));
+				if(plaatsen <= voorstellingDAO.getAantalVrijePlaatsen(id)){
+					Map<Long, Integer> reservaties = new HashMap<>();
+					HttpSession session = request.getSession();
+					reservaties.put(id, plaatsen);
+					session.setAttribute("reservaties", reservaties);
+				}			
 			} catch (Exception ex) {
 				request.setAttribute("fout", "Er werd geen geldig aantal plaatsen meegegeven.");
 			}

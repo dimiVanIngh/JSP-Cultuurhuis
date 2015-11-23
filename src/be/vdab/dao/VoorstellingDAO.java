@@ -71,7 +71,7 @@ public class VoorstellingDAO extends AbstractDAO{
 				if (resultSet.next()) {
 					return resultSet.getInt("vrijeplaatsen");
 				}
-				return 0;
+				return -1;
 			}
 		} catch (SQLException ex) {
 			throw new DAOException(ex);
