@@ -32,7 +32,7 @@
         </dl>
         <form method="post" id="reservatieForm">
        		<label>Plaatsen:<span>${fouten.van}</span>
-      		<input name='plaatsen' value="${param.plaatsen}" type="number" min="1" max="${voorstelling.vrijePlaatsen}" autofocus required></label>
+      		<input name='plaatsen' type="number" min="1" max="${voorstelling.vrijePlaatsen}" autofocus required></label>
         	<input type="submit" value="Reserveren" id="reservatieKnop">
         </form>
       </c:otherwise>

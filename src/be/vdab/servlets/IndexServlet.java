@@ -2,6 +2,8 @@ package be.vdab.servlets;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.List;
 
 import javax.annotation.Resource;
 import javax.servlet.ServletException;
@@ -36,7 +38,7 @@ public class IndexServlet extends HttpServlet {
 			try {
 				long id = Long.parseLong(request.getParameter("id"));
 				try {
-					request.setAttribute("voorstellingen", voorstellingDAO.findAllById(id));
+					request.setAttribute("voorstellingen", voorstellingDAO.findAllByIdWithoutExpired(id));
 					if(((ArrayList<Voorstelling>) request.getAttribute("voorstellingen")).isEmpty()){
 						request.setAttribute("leeg", true);
 					}

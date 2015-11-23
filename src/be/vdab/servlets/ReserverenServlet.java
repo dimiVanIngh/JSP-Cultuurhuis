@@ -8,6 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import javax.sql.DataSource;
 
 import be.vdab.dao.GenreDAO;
@@ -42,7 +43,14 @@ public class ReserverenServlet extends HttpServlet {
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+			try {
+				int plaatsen = Integer.parseInt(request.getParameter("plaatsen"));
+				HttpSession session = request.getSession();
+				
+			} catch (Exception ex) {
+				request.setAttribute("fout", "Er werd geen geldig aantal plaatsen meegegeven.");
+			}
+		request.getRequestDispatcher(VIEW).forward(request, response);
 	}
 
 }

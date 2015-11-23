@@ -1,5 +1,7 @@
 package be.vdab.entities;
 
+import be.vdab.util.BCrypt;
+
 public class Klant extends Persoon{
 	
 	private long id;
@@ -8,7 +10,7 @@ public class Klant extends Persoon{
 	public Klant(String voornaam, String familienaam, Adres adres, long id, String wachtwoord) {
 		super(voornaam, familienaam, adres);
 		this.id = id;
-		this.wachtwoord = wachtwoord;
+		setWachtwoord(wachtwoord);
 	}
 	public long getId() {
 		return id;
@@ -20,7 +22,10 @@ public class Klant extends Persoon{
 		return wachtwoord;
 	}
 	public void setWachtwoord(String wachtwoord) {
-		this.wachtwoord = wachtwoord;
+		this.wachtwoord = BCrypt.hashpw(wachtwoord, BCrypt.gensalt());
+	}
+	public boolean checkWachtwoord(String wachtwoord){
+		return BCrypt.checkpw(wachtwoord, this.wachtwoord);
 	}
 	
 	
