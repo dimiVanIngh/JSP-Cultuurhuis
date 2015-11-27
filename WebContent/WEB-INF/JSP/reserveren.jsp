@@ -32,7 +32,7 @@
         </dl>
         <form method="post" id="reservatieForm">
        		<label>Plaatsen:<span>${fouten.van}</span>
-      		<input name='plaatsen' type="number" min="1" max="${voorstelling.vrijePlaatsen}" value="${reservaties}" autofocus required /></label>
+      		<input name='plaatsen' type="number" min="1" max="${voorstelling.vrijePlaatsen}" value="${aantalGereserveerdePlaatsen}" autofocus required /></label>
       		<input name="voorstellingid" type="hidden" type="number" value="${voorstelling.id}" />
       		<input name="maxplaatsen" type="hidden" type="number" value="${voorstelling.vrijePlaatsen}" />
         	<input type="submit" value="Reserveren" id="reservatieKnop" />

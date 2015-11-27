@@ -32,6 +32,7 @@ public class ReserverenServlet extends HttpServlet {
 		voorstellingDAO.setDataSource(dataSource);
 	}
 	
+	// if + try in 1x?
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		if (request.getParameter("id") != null) {
 			try {
@@ -41,10 +42,17 @@ public class ReserverenServlet extends HttpServlet {
 					if(Calendar.getInstance().getTime().after(tmp.getDatum())){
 						request.setAttribute("fout", "Deze voorstelling is al gedaan.");
 					} else {
-						request.setAttribute("voorstelling", tmp);
-					}
+						HttpSession session = request.getSession();
+						if(session.getAttribute("reservaties") != null){
+							HashMap reservaties = (HashMap<Long,Voorstelling>) session.getAttribute("reservaties");
+							if(reservaties.containsKey(id)){
+								request.setAttribute("aantalGereserveerdePlaatsen", ((Reservatie) reservaties.get(id)).getAantalPlaatsen());
+							} 
+						} 
+					} 
+					request.setAttribute("voorstelling", tmp);
 				} catch (Exception ex) {
-					request.setAttribute("fout", "Er is een probleem met de database, probeer het later eens opnieuw.");
+					request.setAttribute("fout", "Er werd geen geldig id meegegeven.");
 				} 
 			} catch (Exception ex) {
 				request.setAttribute("fout", "Er werd geen geldig id meegegeven.");
