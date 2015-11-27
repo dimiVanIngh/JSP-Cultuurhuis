@@ -13,6 +13,10 @@ public class Reservatie {
 		this.voorstelling = voorstelling;
 		this.aantalPlaatsen = aantalPlaatsen;
 	}
+	public Reservatie(Voorstelling voorstelling, int aantalPlaatsen){
+		this.voorstelling = voorstelling;
+		this.aantalPlaatsen = aantalPlaatsen;
+	}
 	public long getId() {
 		return id;
 	}

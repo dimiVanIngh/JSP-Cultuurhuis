@@ -1,6 +1,7 @@
 package be.vdab.servlets;
 
 import java.io.IOException;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -15,6 +16,8 @@ import javax.sql.DataSource;
 
 import be.vdab.dao.GenreDAO;
 import be.vdab.dao.VoorstellingDAO;
+import be.vdab.entities.Reservatie;
+import be.vdab.entities.Voorstelling;
 
 @WebServlet("/reserveren.htm")
 public class ReserverenServlet extends HttpServlet {
@@ -34,7 +37,12 @@ public class ReserverenServlet extends HttpServlet {
 			try {
 				long id = Long.parseLong(request.getParameter("id"));
 				try {
-					request.setAttribute("voorstelling", voorstellingDAO.findById(id));
+					Voorstelling tmp = voorstellingDAO.findById(id);
+					if(Calendar.getInstance().getTime().after(tmp.getDatum())){
+						request.setAttribute("fout", "Deze voorstelling is al gedaan.");
+					} else {
+						request.setAttribute("voorstelling", tmp);
+					}
 				} catch (Exception ex) {
 					request.setAttribute("fout", "Er is een probleem met de database, probeer het later eens opnieuw.");
 				} 
@@ -49,16 +57,25 @@ public class ReserverenServlet extends HttpServlet {
 			try {
 				int plaatsen = Integer.parseInt(request.getParameter("plaatsen"));
 				long id = Long.parseLong(request.getParameter("voorstellingid"));
-				if(plaatsen <= voorstellingDAO.getAantalVrijePlaatsen(id)){
-					Map<Long, Integer> reservaties = new HashMap<>();
+				int maxPlaatsen = Integer.parseInt(request.getParameter("maxplaatsen"));
+				if(plaatsen > 0 && plaatsen < maxPlaatsen){
 					HttpSession session = request.getSession();
-					reservaties.put(id, plaatsen);
+					Map<Long,Reservatie> reservaties;
+					if(session.getAttribute("reservaties") != null){
+						reservaties = (Map<Long,Reservatie>) session.getAttribute("reservaties");
+					}else {
+						reservaties= new HashMap<Long,Reservatie>();
+					}
+					reservaties.put(id,new Reservatie(voorstellingDAO.findById(id),plaatsen));
 					session.setAttribute("reservaties", reservaties);
-				}			
+					response.sendRedirect(response.encodeRedirectURL(String.format(REDIRECT_URL, request.getContextPath())));
+				} else{
+					request.setAttribute("fout", "Tik een getal tussen 1 en " + maxPlaatsen);
+					request.getRequestDispatcher(VIEW).forward(request, response);		
+				}
 			} catch (Exception ex) {
 				request.setAttribute("fout", "Er werd geen geldig aantal plaatsen meegegeven.");
-			}
-		request.getRequestDispatcher(VIEW).forward(request, response);
+			}	
 	}
 
 }

@@ -1,4 +1,4 @@
-<%@page contentType='text/html' pageEncoding='UTF-8' session='false' trimDirectiveWhitespaces ='true'%> 
+<%@page contentType='text/html' pageEncoding='UTF-8' trimDirectiveWhitespaces ='true'%> 
 <%@taglib prefix='c' uri='http://java.sun.com/jsp/jstl/core'%>
 <%@taglib prefix='fmt' uri='http://java.sun.com/jsp/jstl/fmt'%>
 <%@taglib prefix='vdab' uri='http://vdab.be/tags'%> 
@@ -32,8 +32,9 @@
         </dl>
         <form method="post" id="reservatieForm">
        		<label>Plaatsen:<span>${fouten.van}</span>
-      		<input name='plaatsen' type="number" min="1" max="${voorstelling.vrijePlaatsen}" autofocus required /></label>
+      		<input name='plaatsen' type="number" min="1" max="${voorstelling.vrijePlaatsen}" value="${reservaties}" autofocus required /></label>
       		<input name="voorstellingid" type="hidden" type="number" value="${voorstelling.id}" />
+      		<input name="maxplaatsen" type="hidden" type="number" value="${voorstelling.vrijePlaatsen}" />
         	<input type="submit" value="Reserveren" id="reservatieKnop" />
         </form>
       </c:otherwise>

@@ -10,9 +10,10 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet(name = "winkelmandje.htm", urlPatterns = { "/winkelmandje.htm" })
 public class WinkelmandjeServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	private static final String VIEW = "/WEB-INF/JSP/winkelmandje.jsp";
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		request.getRequestDispatcher(VIEW).forward(request, response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
