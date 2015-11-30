@@ -7,7 +7,7 @@ public class Klant extends Persoon{
 	private long id;
 	private String wachtwoord;
 	
-	public Klant(String voornaam, String familienaam, Adres adres, long id, String wachtwoord) {
+	public Klant(long id,String voornaam, String familienaam, Adres adres, String wachtwoord) {
 		super(voornaam, familienaam, adres);
 		this.id = id;
 		setWachtwoord(wachtwoord);

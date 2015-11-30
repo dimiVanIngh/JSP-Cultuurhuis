@@ -31,7 +31,6 @@
 						<th>Uitvoerders</th>
 						<th>Prijs</th>
 						<th>Plaatsen</th>
-						<!-- Make this a button -->
 						<th><form method="post" id="verwijderForm">
 							<input type="submit" value="Verwijderen" id="verwijderKnop">
 						</form></th>
@@ -48,6 +47,7 @@
 					</tr>
 				</c:forEach>
 			</table>
+			Te betalen: <fmt:formatNumber type="currency" value="${totalePrijs}" />
       </c:otherwise>
     </c:choose>
   </body>

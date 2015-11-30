@@ -7,9 +7,9 @@ import java.sql.SQLException;
 
 public class KlantDAO extends AbstractDAO{
 	private static final String FIND_BY_GEBRUIKERSNAAM = "select id from klanten where gebruikersnaam = ?";
-	private static final String INSERT_SQL = "insert into klanten(voornaam,familienaam,straat,huisnr,postcode,gemeente,gebruikersnaam,wachtwoord) values (?,?)";
+	private static final String INSERT_SQL = "insert into klanten(voornaam,familienaam,straat,huisnr,postcode,gemeente,gebruikersnaam,wachtwoord) values (?,?,?,?,?,?,?,?)";
 
-	/*public Klant findByGebruikersnaam(String gebruikersnaam){
+	public Klant findByGebruikersnaam(String gebruikersnaam){
 		try (Connection connection = dataSource.getConnection();
 				PreparedStatement statement = connection.prepareStatement(FIND_BY_GEBRUIKERSNAAM)) {
 			statement.setString(1, gebruikersnaam);
@@ -22,8 +22,8 @@ public class KlantDAO extends AbstractDAO{
 	}
 
 	private Klant resultSetRijNaarGenre(ResultSet resultSet) throws SQLException {
-		return new Genre(resultSet.getLong("id"), resultSet.getString("naam"));
-	}*/
+		return new Klant(resultSet.getLong("id"), resultSet.getString("naam"));
+	}
 	
 	public boolean isGebruikersnaamBezet(String gebruikersnaam){
 		try (Connection connection = dataSource.getConnection();

@@ -1,6 +1,7 @@
 package be.vdab.servlets;
 
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -19,6 +20,15 @@ public class WinkelmandjeServlet extends HttpServlet {
 	private static final String VIEW = "/WEB-INF/JSP/winkelmandje.jsp";
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		HttpSession session = request.getSession();
+		if(session.getAttribute("reservaties") != null){
+			BigDecimal totaal = new BigDecimal(0);
+			Map<Long,Reservatie> reservaties = (HashMap<Long,Reservatie>) session.getAttribute("reservaties");
+			for(Reservatie reservatie : reservaties.values()){
+				totaal = totaal.add(reservatie.getVoorstelling().getPrijs().multiply(new BigDecimal(reservatie.getAantalPlaatsen())));
+			}
+			request.setAttribute("totalePrijs", totaal);
+		}
 		request.getRequestDispatcher(VIEW).forward(request, response);
 	}
 
