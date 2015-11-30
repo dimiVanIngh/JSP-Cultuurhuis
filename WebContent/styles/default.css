@@ -73,6 +73,7 @@ nav ul {
 
 .horizontal_menu li{
 	display: inline;
+	list-style: none;
 }
 
 nav li {

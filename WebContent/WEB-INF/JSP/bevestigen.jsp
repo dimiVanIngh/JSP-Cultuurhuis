@@ -15,7 +15,7 @@
   <ul class="horizontal_menu">
   	<li><a href="<c:url value="/index.htm"/>">Voorstellingen</a></li>
   	<c:if test="${not empty reservaties}">
-  		<li><a href="<c:url value="/index.htm"/>">Reservatiemandje</a></li>
+  		<li><a href="<c:url value="/winkelmandje.htm"/>">Reservatiemandje</a></li>
   	</c:if>
   </ul>
     <c:choose> 
@@ -23,22 +23,24 @@
         <div class='fout'>Geen reservaties gevonden.</div>
       </c:when> 
       <c:otherwise>
-        <dl>
-          <dt>Voorstelling:</dt><dd><c:out value='${voorstelling.titel}' /></dd>
-          <dt>Uitvoerders</dt><dd><c:out value='${voorstelling.uitvoerders}' /></dd>
-          <dt>Datum</dt><dd><fmt:formatDate value='${voorstelling.datum}' type='both' dateStyle='short' timeStyle="short" /></dd>
-          <dt>Prijs</dt><dd><fmt:formatNumber type="currency" value="${voorstelling.prijs}"/></dd>
-          <dt>Vrije plaatsen</dt><dd><fmt:formatNumber type="number" value="${voorstelling.vrijePlaatsen}" /></dd>
-        </dl>
-        <form method="post" id="reservatieForm">
-       		<label>Plaatsen:<span>${fouten.van}</span>
-      		<input name='plaatsen' type="number" min="1" max="${voorstelling.vrijePlaatsen}" value="${aantalGereserveerdePlaatsen}" autofocus required /></label>
-      		<input name="maxplaatsen" type="hidden" type="number" value="${voorstelling.vrijePlaatsen}" />
-        	<input type="submit" value="Reserveren" id="reservatieKnop" />
+		<h2>Stap 1: wie ben je?</h2>
+        <form method="post" id="wieForm">
+       		<label>Gebruikersnaam:
+      		<input name='gebruikersnaam' autofocus required /></label>
+      		<label>Paswoord:
+      		<input name='wachtwoord' type="password" required /></label>
+        	<input type="submit" <c:if test='${gevonden}'>disabled</c:if> value="Zoek me op" id="zoekmeopKnop" />
+        	<input type="submit" <c:if test='${gevonden}'>disabled</c:if> value="Ik ben nieuw" id="ikbennieuwKnop" />
         </form>
-        <div class='fout'>${fout}</div>  
+        <div>${user}</div>  
+        <h2>Stap 2: bevestigen</h2>
+        <form method="post" id="bevestigingsForm" action="commit">
+        <input type="submit" <c:if test='${!gevonden}'>disabled</c:if> value="Bevestigen" id="bevestigingsKnop" />
+        </form>
       </c:otherwise>
     </c:choose>
-	<vdab:formscript formID="reservatieForm" buttonID="reservatieKnop"/>
+	<vdab:formscript formID="wieForm" buttonID="bevestigingsKnop"/>
+	<vdab:formscript formID="wieForm" buttonID="ikbennieuwKnop"/>
+	<vdab:formscript formID="bevestigingsForm" buttonID="bevestigingsKnop"/>
   </body>
 </html>

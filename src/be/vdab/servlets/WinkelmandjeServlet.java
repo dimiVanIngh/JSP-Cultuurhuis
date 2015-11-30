@@ -1,12 +1,17 @@
 package be.vdab.servlets;
 
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import be.vdab.entities.Reservatie;
 
 @WebServlet(name = "winkelmandje.htm", urlPatterns = { "/winkelmandje.htm" })
 public class WinkelmandjeServlet extends HttpServlet {
@@ -18,7 +23,16 @@ public class WinkelmandjeServlet extends HttpServlet {
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		doGet(request, response);
+		if (request.getParameterValues("id") != null) {
+			@SuppressWarnings("unchecked")
+			HttpSession session = request.getSession();
+			Map<Long,Reservatie> reservaties = (HashMap<Long,Reservatie>) session.getAttribute("reservaties");
+			for (String id : request.getParameterValues("id")) {
+				reservaties.remove(Long.parseLong(id));
+			}
+			session.setAttribute("reservaties", reservaties);
+		}
+		response.sendRedirect(response.encodeRedirectURL(request.getRequestURI()));
 	}
 
 }

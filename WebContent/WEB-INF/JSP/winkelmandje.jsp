@@ -12,7 +12,7 @@
   <ul class="horizontal_menu">
   	<li><a href="<c:url value="/index.htm"/>">Voorstellingen</a></li>
   	<c:if test="${not empty reservaties}">
-  		<li><a href="<c:url value="/index.htm"/>">Bevestig reservatie</a></li>
+  		<li><a href="<c:url value="/bevestig.htm"/>">Bevestig reservatie</a></li>
   	</c:if>
   </ul>
     <c:choose> 
@@ -32,7 +32,9 @@
 						<th>Prijs</th>
 						<th>Plaatsen</th>
 						<!-- Make this a button -->
-						<th>Verwijderen</th>
+						<th><form method="post" id="verwijderForm">
+							<input type="submit" value="Verwijderen" id="verwijderKnop">
+						</form></th>
 					</tr>
 				</thead>
 				<c:forEach var="reservatie" items="${reservaties.values()}">
@@ -42,7 +44,7 @@
 						<td><c:out value='${reservatie.voorstelling.uitvoerders}' /></td>
 						<td><fmt:formatNumber type="currency" value="${reservatie.voorstelling.prijs}" /></td>
 						<td><fmt:formatNumber type="number" value="${reservatie.aantalPlaatsen}" /></td>
-						<td></td>
+						<td><input type='checkbox' form="verwijderForm"  name='id' value='${reservatie.voorstelling.id}'></td>
 					</tr>
 				</c:forEach>
 			</table>
