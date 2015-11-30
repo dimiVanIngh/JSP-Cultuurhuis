@@ -12,7 +12,7 @@
   </head> 
   <body>
   <h1>Het cultuurhuis: reserveren <img src="images/cultuur.jpg"alt="cultuur logo" id="cultuur" /></h1>
-  <ul id="horizontal_menu">
+  <ul class="horizontal_menu">
   	<li><a href="<c:url value="/index.htm"/>">Voorstellingen</a></li>
   </ul>
     <c:choose> 

@@ -67,11 +67,11 @@ nav ul {
 	padding: 0.4em 0;
 }
 
-#horizontal_menu{
+.horizontal_menu{
 	padding: 0.4em 0;
 }
 
-#horizontal_menu li{
+.horizontal_menu li{
 	display: inline;
 }
 

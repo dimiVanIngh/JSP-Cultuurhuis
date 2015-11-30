@@ -9,7 +9,7 @@
   </head> 
   <body>
   <h1>Het cultuurhuis:reservatiemandje <img src="images/cultuur.jpg"alt="cultuur logo" id="cultuur" /></h1>
-  <ul id="horizontal_menu">
+  <ul class="horizontal_menu">
   	<li><a href="<c:url value="/index.htm"/>">Voorstellingen</a></li>
   	<c:if test="${not empty reservaties}">
   		<li><a href="<c:url value="/index.htm"/>">Bevestig reservatie</a></li>
