@@ -6,18 +6,18 @@
 <html lang='nl'> 
   <head>
   <c:choose>
-  	<c:when test='${not empty voorstelling}'><vdab:head title="${voorstelling.titel}" /></c:when>
-  	<c:otherwise><vdab:head title='Probleem met id' /></c:otherwise>
+  	<c:when test='${not empty reservaties}'><vdab:head title="Bevestig reservaties" /></c:when>
+  	<c:otherwise><vdab:head title='Geen reservaties gevonden' /></c:otherwise>
   </c:choose>   
   </head> 
   <body>
-  <h1>Het cultuurhuis: reserveren <img src="images/cultuur.jpg"alt="cultuur logo" id="cultuur" /></h1>
+  <h1>Het cultuurhuis: bevestiging reservaties <img src="images/cultuur.jpg"alt="cultuur logo" id="cultuur" /></h1>
   <ul id="horizontal_menu">
   	<li><a href="<c:url value="/index.htm"/>">Voorstellingen</a></li>
   </ul>
     <c:choose> 
-      <c:when test="${empty voorstelling}">
-        <div class='fout'>Probleem met het id</div>
+      <c:when test="${empty reservaties}">
+        <div class='fout'>Geen reservaties gevonden.</div>
       </c:when> 
       <c:otherwise>
         <dl>

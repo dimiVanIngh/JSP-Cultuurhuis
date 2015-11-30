@@ -7,7 +7,7 @@
 <vdab:head title='Registreren' />
 </head>
 <body>
-	<h1>Het cultuurhuis: nieuwe klant</h1>
+	<h1>Het cultuurhuis: nieuwe klant <img src="images/cultuur.jpg"alt="cultuur logo" id="cultuur" /></h1>
 	<ul id="horizontal_menu">
 		<li><a href="<c:url value='/index.htm'/>">Voorstellingen</a></li>
 		<li><a href="<c:url value="/index.htm"/>">Reservatiemandje</a></li>

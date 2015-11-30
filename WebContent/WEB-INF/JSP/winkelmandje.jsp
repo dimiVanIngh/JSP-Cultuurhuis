@@ -8,7 +8,7 @@
 	<vdab:head title='Reservatie mandje' />
   </head> 
   <body>
-  <h1>Het cultuurhuis:reservatiemandje</h1>
+  <h1>Het cultuurhuis:reservatiemandje <img src="images/cultuur.jpg"alt="cultuur logo" id="cultuur" /></h1>
   <ul id="horizontal_menu">
   	<li><a href="<c:url value="/index.htm"/>">Voorstellingen</a></li>
   	<c:if test="${not empty reservaties}">
