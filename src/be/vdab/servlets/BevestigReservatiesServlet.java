@@ -26,13 +26,9 @@ public class BevestigReservatiesServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.getRequestDispatcher(VIEW).forward(request, response);
-		//request.setAttribute("gevonden", true);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		if (request.getParameter("zoekmeop") != null) {
-		} else if (request.getParameter("ikbennieuw") != null) {
-		} else if (request.getParameter("bevestig") != null) {
-		}
+		doGet(request, response);
 	}
 }

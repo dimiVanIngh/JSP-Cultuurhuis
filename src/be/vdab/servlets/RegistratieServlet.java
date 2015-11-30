@@ -1,7 +1,8 @@
 package be.vdab.servlets;
 
 import java.io.IOException;
-import java.util.HashMap;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
@@ -31,16 +32,13 @@ public class RegistratieServlet extends HttpServlet {
 		request.getRequestDispatcher(VIEW).forward(request, response);
 	}
 
-	//TODO method creer klant / klantdao insert sql
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		Map<String, String> fouten = new HashMap<>();
+		List<String> fouten = new ArrayList<String>();
 		checkVeldenIngevuld(request, fouten);
-		checkVeldenAlfaNumeriek(request, fouten);
+		//checkVeldenAlfaNumeriek(request, fouten);
 		if(!wachtwoordenGelijk(request)){
-			fouten.put("confirmwachtwoord", "Paswoorden komen niet overeen.");
-		} if(klantDAO.isGebruikersnaamBezet(request.getParameter("gebruikersnaam"))){
-			fouten.put("bezet", "Gebruikersnaam is al bezet");
-		}
+			fouten.add("Paswoorden komen niet overeen.");
+		} 
 		if (fouten.isEmpty()) {
 			//klantDAO.addBericht(new GastenboekBericht(naam, bericht));
 			//response.sendRedirect(response.encodeRedirectURL(String.format(REDIRECT_URL, request.getContextPath())));
@@ -50,7 +48,7 @@ public class RegistratieServlet extends HttpServlet {
 		}
 	}
 
-	private void checkVeldenIngevuld(HttpServletRequest request,Map<String,String> fouten){
+	private void checkVeldenIngevuld(HttpServletRequest request,List<String> fouten){
 		checkVeldIngevuld(request, fouten, "voornaam");
 		checkVeldIngevuld(request, fouten, "familienaam");
 		checkVeldIngevuld(request, fouten, "straat");
@@ -60,18 +58,18 @@ public class RegistratieServlet extends HttpServlet {
 		checkVeldIngevuld(request, fouten, "gebruikersnaam");
 		checkVeldIngevuld(request, fouten, "wachtwoord");
 	}
-	private void checkVeldIngevuld(HttpServletRequest request,Map<String,String> fouten,String parameter){
+	private void checkVeldIngevuld(HttpServletRequest request,List<String> fouten,String parameter){
 		if (request.getParameter(parameter).isEmpty()) {
-			fouten.put(parameter, parameter + " niet ingevuld.");
+			fouten.add(parameter + " niet ingevuld.");
 		}
 	}
-	private void checkVeldenAlfaNumeriek(HttpServletRequest request,Map<String,String> fouten){
+	private void checkVeldenAlfaNumeriek(HttpServletRequest request,List<String> fouten){
 		checkVeldAlfaNumeriek(request, fouten, "huisnr");
 		checkVeldAlfaNumeriek(request, fouten, "postcode");
 	}
-	private void checkVeldAlfaNumeriek(HttpServletRequest request,Map<String,String> fouten,String parameter){
+	private void checkVeldAlfaNumeriek(HttpServletRequest request,List<String> fouten,String parameter){
 		if(!Validator.isAlphaNumeric(request.getParameter(parameter))){
-			fouten.put(parameter, parameter + " mag enkel cijfers en/of letters bevatten, geen speciale tekens.");
+			fouten.add(parameter + " mag enkel cijfers en letters bevatten, geen speciale tekens.");
 		}
 	}
 	private boolean wachtwoordenGelijk(HttpServletRequest request){

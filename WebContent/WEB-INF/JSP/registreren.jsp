@@ -10,8 +10,10 @@
 	<h1>Het cultuurhuis: nieuwe klant <img src="images/cultuur.jpg"alt="cultuur logo" id="cultuur" /></h1>
 	<ul class="horizontal_menu">
 		<li><a href="<c:url value='/index.htm'/>">Voorstellingen</a></li>
-		<li><a href="<c:url value="/index.htm"/>">Reservatiemandje</a></li>
-		<li><a href="<c:url value="/index.htm"/>">Bevestig reservatie</a></li>
+		<c:if test="${not empty reservaties}">
+			<li><a href="<c:url value="/index.htm"/>">Reservatiemandje</a></li>
+			<li><a href="<c:url value="/index.htm"/>">Bevestig reservatie</a></li>
+		</c:if>
 	</ul>
 	<form method="post" id="registratieForm">
 		<label>Voornaam: 
@@ -37,7 +39,7 @@
 	<c:if test="${not empty fouten}"></c:if>
 	<ul>
 		<c:forEach var='fout' items="${fouten}">
-		<span class ="fout">${fout}</span>
+		<li class="error_list">${fout}</li>
 		</c:forEach>
 	</ul>
 	<vdab:formscript formID="registratieForm" buttonID="bevestigKnop"/>

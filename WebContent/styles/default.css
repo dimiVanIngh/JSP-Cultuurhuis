@@ -75,6 +75,10 @@ nav ul {
 	display: inline;
 	list-style: none;
 }
+.error_list{
+	list-style: square;
+	color: red;
+}
 
 nav li {
 	display: inline;
