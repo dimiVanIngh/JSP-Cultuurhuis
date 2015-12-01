@@ -28,4 +28,8 @@ public abstract class Persoon {
 	public void setAdres(Adres adres) {
 		this.adres = adres;
 	}
+	@Override
+	public String toString(){
+		return voornaam + " " + familienaam + " " + adres;
+	}
 }

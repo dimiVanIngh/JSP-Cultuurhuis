@@ -12,8 +12,21 @@ public class Klant extends Persoon{
 		super(voornaam, familienaam, adres);
 		this.id = id;
 		this.gebruikersnaam = gebruikersnaam;
-		setWachtwoord(wachtwoord);
+		this.wachtwoord = wachtwoord;
 	}
+	
+    public Klant(long id, String voornaam, String familienaam, String straat, String huisnr, String gemeente, String postcode, String gebruikersnaam, String wachtwoord) {
+        super(voornaam, familienaam, new Adres(straat, huisnr, gemeente, postcode));
+        this.id = id;
+        this.gebruikersnaam = gebruikersnaam;
+        this.wachtwoord = wachtwoord;
+    }
+    
+    public Klant(String voornaam, String familienaam, String straat, String huisnr, String gemeente, String postcode, String gebruikersnaam, String wachtwoord) {
+        super(voornaam, familienaam, new Adres(straat, huisnr, gemeente, postcode));
+        this.gebruikersnaam = gebruikersnaam;
+        this.wachtwoord = wachtwoord;
+    }
 	
 	public String getGebruikersnaam() {
 		return gebruikersnaam;
@@ -32,12 +45,10 @@ public class Klant extends Persoon{
 	public String getWachtwoord() {
 		return wachtwoord;
 	}
-	public void setWachtwoord(String wachtwoord) {
-		this.wachtwoord = BCrypt.hashpw(wachtwoord, BCrypt.gensalt(13));
+	public void hashWachtwoord() {
+		this.wachtwoord = BCrypt.hashpw(this.wachtwoord, BCrypt.gensalt(13));
 	}
 	public boolean checkWachtwoord(String wachtwoord){
 		return BCrypt.checkpw(wachtwoord, this.wachtwoord);
-	}
-	
-	
+	}	
 }

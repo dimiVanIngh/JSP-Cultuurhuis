@@ -24,23 +24,26 @@
       </c:when> 
       <c:otherwise>
 		<h2>Stap 1: wie ben je?</h2>
-        <form method="post" id="wieForm">
+        <form method="post">
        		<label>Gebruikersnaam:
-      		<input name='gebruikersnaam' autofocus required /></label>
+      		<input type="text" name='gebruikersnaam' autofocus required /></label>
       		<label>Paswoord:
       		<input name='wachtwoord' type="password" required /></label>
-        	<input type="submit" <c:if test='${not empty gevonden}'>disabled</c:if> value="Zoek me op" name="zoekmeop" id="zoekmeopKnop" />
+        	<input type="submit" <c:if test='${not empty user}'>disabled</c:if> value="Zoek me op" name="zoekmeop" id="zoekmeopKnop" />
         </form>
-        <form action="registreren.htm" id="ikbennieuwForm" >
-        	<input type="submit" <c:if test='${not empty gevonden}'>disabled</c:if> value="Ik ben nieuw" name="ikbennieuw" id="ikbennieuwKnop" />
+        <form action="registreren.htm" id="ikbennieuwForm">
+        	<input type="submit" <c:if test='${not empty user}'>disabled</c:if> value="Ik ben nieuw" name="ikbennieuw" id="ikbennieuwKnop" />
         </form>
-        <div>${user}</div>  
+        <c:if test="${not empty user}">
+        	<div><c:out value='${user}' /></div>  
+        </c:if>
         <h2>Stap 2: bevestigen</h2>
-        <form method="post" id="bevestigingsForm" action="commit">
-        <input type="submit" <c:if test='${empty gevonden}'>disabled</c:if> value="Bevestigen" name="bevestig" id="bevestigingsKnop" />
+        <form method="post" id="bevestigingsForm" action=bevestig.htm?bevestig>
+        <input type="submit" <c:if test='${empty user}'>disabled</c:if> value="Bevestigen" name="bevestig" id="bevestigingsKnop" />
         </form>
       </c:otherwise>
     </c:choose>
+    <!-- werken name ipv id -->
 	<vdab:formscript formID="wieForm" buttonID="zoekmeopKnop"/>
 	<vdab:formscript formID="ikbennieuwForm" buttonID="ikbennieuwKnop"/>
 	<vdab:formscript formID="bevestigingsForm" buttonID="bevestigingsKnop"/>

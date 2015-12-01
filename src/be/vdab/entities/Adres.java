@@ -1,23 +1,23 @@
 package be.vdab.entities;
 
 public class Adres {
-	private String Straat;
+	private String straat;
 	private String huisnummer;
 	private String gemeente;
 	private String postcode;
 	
 	//TODO checken algemene exceptions + custom error?
 	public Adres(String straat, String huisnummer, String gemeente, String postcode) {
-		Straat = straat;
+		this.straat = straat;
 		this.huisnummer = huisnummer;
 		this.gemeente = gemeente;
 		this.postcode = postcode;
 	}
 	public String getStraat() {
-		return Straat;
+		return straat;
 	}
 	public void setStraat(String straat) {
-		Straat = straat;
+		this.straat = straat;
 	}
 	public String getHuisnummer() {
 		return huisnummer;
@@ -36,6 +36,10 @@ public class Adres {
 	}
 	public void setPostcode(String postcode) {
 		this.postcode = postcode;
+	}
+	@Override
+	public String toString(){
+		return straat + " " + huisnummer + " " + postcode + " " + gemeente;
 	}
 	
 	

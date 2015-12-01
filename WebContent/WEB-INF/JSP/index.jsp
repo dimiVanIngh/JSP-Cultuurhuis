@@ -12,7 +12,7 @@
 	  <ul class="horizontal_menu">
   		<c:if test="${not empty reservaties}">
   		<li><a href="<c:url value="/winkelmandje.htm"/>">Reservatiemandje</a></li>
-  		<li><a href="<c:url value="/bevestigen.htm"/>">Bevestig reservatie</a></li>
+  		<li><a href="<c:url value="/bevestig.htm"/>">Bevestig reservatie</a></li>
   		</c:if>
   	</ul>
 	<h2>Genres</h2>

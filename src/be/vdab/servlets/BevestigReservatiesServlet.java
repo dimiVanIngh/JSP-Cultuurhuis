@@ -11,6 +11,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.sql.DataSource;
 
 import be.vdab.dao.KlantDAO;
+import be.vdab.entities.Klant;
+import be.vdab.util.BCrypt;
 
 @WebServlet("/bevestig.htm")
 public class BevestigReservatiesServlet extends HttpServlet {
@@ -29,6 +31,27 @@ public class BevestigReservatiesServlet extends HttpServlet {
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		doGet(request, response);
+		if (request.getParameter("zoekmeop") != null) {
+			zoekMeOp(request, response);
+		} else if (request.getParameter("bevestig") != null) {
+			bevestig(request, response);
+		} else doGet(request, response);
+	}
+
+	private void zoekMeOp(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+		String gebruikersnaam = (String) request.getParameter("gebruikersnaam");
+		String wachtwoord = (String) request.getParameter("wachtwoord");
+		Klant klantInDB = klantDAO.findByGebruikersnaam(gebruikersnaam);
+		if(klantInDB != null){
+			if(BCrypt.checkpw(wachtwoord, klantInDB.getWachtwoord())){
+				request.setAttribute("user", klantInDB);
+			} else request.setAttribute("user", "verkeerde gebruikersnaam of paswoord.");
+		} else {
+			request.setAttribute("user", "verkeerde gebruikersnaam of paswoord.");
+		} request.getRequestDispatcher(VIEW).forward(request, response);
+	}
+	
+	private void bevestig(HttpServletRequest request, HttpServletResponse response){
+		
 	}
 }

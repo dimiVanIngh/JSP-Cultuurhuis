@@ -62,11 +62,6 @@ input[type='checkbox'] {
 	display: inline;
 }
 
-nav ul {
-	background-color: red;
-	padding: 0.4em 0;
-}
-
 .horizontal_menu{
 	padding: 0.4em 0;
 }

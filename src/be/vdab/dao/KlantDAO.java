@@ -17,7 +17,9 @@ public class KlantDAO extends AbstractDAO{
 				PreparedStatement statement = connection.prepareStatement(FIND_BY_GEBRUIKERSNAAM)) {
 			statement.setString(1, gebruikersnaam);
 			try(ResultSet resultSet = statement.executeQuery()) {
-				return resultSetRijNaarKlant(resultSet,gebruikersnaam);
+				if (resultSet.next()) {
+					return resultSetRijNaarKlant(resultSet, gebruikersnaam);
+				} else return null;
 			}
 		} catch (SQLException ex) {
 			throw new DAOException(ex);
@@ -27,15 +29,15 @@ public class KlantDAO extends AbstractDAO{
 	public boolean insertKlant(Klant klant){
 		boolean inserted = false;
 		try (Connection connection = dataSource.getConnection();
-				PreparedStatement statement = connection.prepareStatement(FIND_BY_GEBRUIKERSNAAM)) {
+				PreparedStatement statement = connection.prepareStatement(INSERT_SQL)) {
 			statement.setString(1, klant.getVoornaam());
-			statement.setString(1, klant.getFamilienaam());
-			statement.setString(1, klant.getAdres().getStraat());
-			statement.setString(1, klant.getAdres().getHuisnummer());
-			statement.setString(1, klant.getAdres().getPostcode());
-			statement.setString(1, klant.getAdres().getGemeente());
-			statement.setString(1, klant.getGebruikersnaam());
-			statement.setString(1, klant.getWachtwoord());
+			statement.setString(2, klant.getFamilienaam());
+			statement.setString(3, klant.getAdres().getStraat());
+			statement.setString(4, klant.getAdres().getHuisnummer());
+			statement.setString(5, klant.getAdres().getPostcode());
+			statement.setString(6, klant.getAdres().getGemeente());
+			statement.setString(7, klant.getGebruikersnaam());
+			statement.setString(8, klant.getWachtwoord());
 			if(statement.executeUpdate() != 0){
 				inserted = true;
 			}
@@ -44,11 +46,12 @@ public class KlantDAO extends AbstractDAO{
 		}
 		return inserted;
 	}
+	/*
 	private Klant resultSetRijNaarKlant(ResultSet resultSet) throws SQLException {
 		return new Klant(resultSet.getLong("id"), resultSet.getString("voornaam"),resultSet.getString("familienaam"),
 				new Adres(resultSet.getString("straat"),resultSet.getString("huisnr"),resultSet.getString("postcode"),resultSet.getString("gemeente"))
 				,resultSet.getString("gebruikersnaam"),resultSet.getString("wachtwoord"));
-	}
+	}*/
 	private Klant resultSetRijNaarKlant(ResultSet resultSet, String gebruikersnaam) throws SQLException {
 		return new Klant(resultSet.getLong("id"), resultSet.getString("voornaam"),resultSet.getString("familienaam"),
 				new Adres(resultSet.getString("straat"),resultSet.getString("huisnr"),resultSet.getString("postcode"),resultSet.getString("gemeente"))

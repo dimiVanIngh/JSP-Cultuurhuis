@@ -11,25 +11,25 @@
 	<ul class="horizontal_menu">
 		<li><a href="<c:url value='/index.htm'/>">Voorstellingen</a></li>
 		<c:if test="${not empty reservaties}">
-			<li><a href="<c:url value="/index.htm"/>">Reservatiemandje</a></li>
-			<li><a href="<c:url value="/index.htm"/>">Bevestig reservatie</a></li>
+			<li><a href="<c:url value="/winkelmandje.htm"/>">Reservatiemandje</a></li>
+			<li><a href="<c:url value="/bevestig.htm"/>">Bevestig reservatie</a></li>
 		</c:if>
 	</ul>
 	<form method="post" id="registratieForm">
 		<label>Voornaam: 
-		<input name='voornaam' value="${param.voornaam}" type="text" autofocus required></label>
+		<input name='voornaam' value="<c:out value='${param.voornaam}'/>" type="text" autofocus required></label>
 		<label>Familienaam: 
-		<input name='familienaam' value="${param.familienaam}" type="text" required></label>
+		<input name='familienaam' value="<c:out value='${param.familienaam}'/>" type="text" required></label>
 		<label>Straat: 
-		<input name='straat' value="${param.straat}" type="text" required></label>
+		<input name='straat' value="<c:out value='${param.straat}'/>" type="text" required></label>
 		<label>Huisnr: 
-		<input name='huisnr' value="${param.huisnr}" type="text" required></label>
+		<input name='huisnr' value="<c:out value='${param.huisnr}'/>" type="text" required></label>
 		<label>Postcode: 
-		<input name='postcode' value="${param.postcode}" type="text" required></label>
+		<input name='postcode' value="<c:out value='${param.postcode}'/>" type="text" required></label>
 		<label>Gemeente: 
-		<input name='gemeente' value="${param.gemeente}" type="text" required></label>
+		<input name='gemeente' value="<c:out value='${param.gemeente}'/>" type="text" required></label>
 		<label>Gebruikersnaam: 
-		<input name='gebruikersnaam' type="text" required></label>
+		<input name='gebruikersnaam' value="<c:out value='${param.gebruikersnaam}'/>"type="text" required></label>
 		<label>Paswoord: 
 		<input name='wachtwoord' type="password" required></label>
 		<label>Herhaal paswoord: 

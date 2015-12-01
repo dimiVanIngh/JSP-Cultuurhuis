@@ -3,7 +3,7 @@
 <%@attribute name='genres' required='true' type='java.util.List'%>
 <%@taglib prefix='c' uri='http://java.sun.com/jsp/jstl/core'%>
 <nav>
-	<ul>
+	<ul class="horizontal_menu">
 		<c:forEach var="genre" items="${genres}">
 			<li><c:url value="/index.htm" var="voorstellingURL">
 					<c:param name='id' value='${genre.id}' />
