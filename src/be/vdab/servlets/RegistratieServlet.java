@@ -40,7 +40,6 @@ public class RegistratieServlet extends HttpServlet {
 		if(!wachtwoordenGelijk(request)){
 			fouten.add("Paswoorden komen niet overeen.");
 		} 
-		// TODO checken username -> add / error
 		if (fouten.isEmpty()) {
 			Klant klant = createKlant(request);
 			klant.hashWachtwoord();
