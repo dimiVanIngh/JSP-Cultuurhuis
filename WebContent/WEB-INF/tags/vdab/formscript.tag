@@ -2,7 +2,7 @@
 <%@attribute name='formName' required='true' type='java.lang.String'%>
 <%@attribute name='buttonID' required='true' type='java.lang.String'%>
     <script>
- 		document.getElementByName('${formName}').onsubmit = function(){
+ 		document.getElementsByName('${formName}').onsubmit = function(){
     		document.getElementById('${buttonID}').disabled = true;
     	};
 	</script>

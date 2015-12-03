@@ -8,7 +8,7 @@ body {
 	width: 100%;
 }
 
-dd,dt {
+dd, dt {
 	margin-left: 0;
 }
 
@@ -39,6 +39,10 @@ label span {
 	margin-left: 0.5em;
 }
 
+h2, h1 {
+	color: blue;
+}
+
 label {
 	cursor: pointer;
 }
@@ -50,7 +54,7 @@ input {
 	font-size: 1.1em;
 }
 
-input:focus,textarea:focus,select:focus {
+input:focus, textarea:focus, select:focus {
 	background-color: #FFFFD6
 }
 
@@ -62,17 +66,38 @@ input[type='checkbox'] {
 	display: inline;
 }
 
-.horizontal_menu{
+.horizontal_menu {
 	padding: 0.4em 0;
 }
 
-.horizontal_menu li{
+.horizontal_menu li {
 	display: inline;
 	list-style: none;
 }
-.error_list{
+
+.error_list {
 	list-style: square;
 	color: red;
+}
+
+table thead tr:FIRST-CHILD {
+	background-color: #ff8040;
+}
+
+table tr:nth-child(even) {
+	background-color: #8080ff;
+}
+
+table tr:nth-child(odd) {
+	background-color: #ffff80;
+}
+
+table {
+	text-align: center;
+}
+
+table tr td:nth-child(5) {
+	text-align: right;
 }
 
 nav li {
@@ -115,7 +140,7 @@ ul.zebra li:nth-child(odd):hover, ul.zebra li:nth-child(even):hover {
 	background-color: #ccff00;
 }
 
-#cultuur{
+#cultuur {
 	width: 100px;
 	height: 100px;
 }

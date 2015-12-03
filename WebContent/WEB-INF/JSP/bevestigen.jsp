@@ -35,10 +35,19 @@
         	<input type="submit" <c:if test='${not empty user}'>disabled</c:if> value="Ik ben nieuw" name="ikbennieuw" id="ikbennieuwKnop" />
         </form>
         <c:if test="${not empty user}">
-        	<div><c:out value='${user}' /></div>  
+        	<div>
+        		<c:out value='${user.voornaam}' /> &nbsp;
+        		<c:out value='${user.familienaam}' /> &nbsp;
+        		<c:out value='${user.adres}' />
+        	</div>  
+        </c:if>
+        <c:if test="${not empty fout}">
+        	<div>
+				<c:out value='${fout}' />
+        	</div>  
         </c:if>
         <h2>Stap 2: bevestigen</h2>
-        <form method="post" name="bevestigingsForm" action=bevestig.htm?bevestig>
+        <form method="post" name="bevestigingsForm" action=overzicht.htm>
         <input type="submit" <c:if test='${empty user}'>disabled</c:if> value="Bevestigen" name="bevestig" id="bevestigingsKnop" />
         </form>
       </c:otherwise>
