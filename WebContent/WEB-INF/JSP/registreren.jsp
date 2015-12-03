@@ -15,7 +15,7 @@
 			<li><a href="<c:url value="/bevestig.htm"/>">Bevestig reservatie</a></li>
 		</c:if>
 	</ul>
-	<form method="post" id="registratieForm">
+	<form method="post" name="registratieForm">
 		<label>Voornaam: 
 		<input name='voornaam' value="<c:out value='${param.voornaam}'/>" type="text" autofocus required></label>
 		<label>Familienaam: 
@@ -42,6 +42,6 @@
 		<li class="error_list">${fout}</li>
 		</c:forEach>
 	</ul>
-	<vdab:formscript formID="registratieForm" buttonID="bevestigKnop"/>
+	<vdab:formscript formName="registratieForm" buttonID="bevestigKnop"/>
 </body>
 </html>

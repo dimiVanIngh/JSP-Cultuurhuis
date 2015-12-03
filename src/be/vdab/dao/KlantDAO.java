@@ -26,7 +26,7 @@ public class KlantDAO extends AbstractDAO{
 		}
 	}
 		
-	public boolean insertKlant(Klant klant){
+	public boolean insertKlant(Klant klant) throws DAOException{
 		boolean inserted = false;
 		try (Connection connection = dataSource.getConnection();
 				PreparedStatement statement = connection.prepareStatement(INSERT_SQL)) {

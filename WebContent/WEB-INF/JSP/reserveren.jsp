@@ -24,18 +24,19 @@
           <dt>Voorstelling:</dt><dd><c:out value='${voorstelling.titel}' /></dd>
           <dt>Uitvoerders</dt><dd><c:out value='${voorstelling.uitvoerders}' /></dd>
           <dt>Datum</dt><dd><fmt:formatDate value='${voorstelling.datum}' type='both' dateStyle='short' timeStyle="short" /></dd>
-          <dt>Prijs</dt><dd><fmt:formatNumber type="currency" value="${voorstelling.prijs}"/></dd>
+          <dt>Prijs</dt><dd><fmt:formatNumber type="currency" value="${voorstelling.prijs}" /></dd>
           <dt>Vrije plaatsen</dt><dd><fmt:formatNumber type="number" value="${voorstelling.vrijePlaatsen}" /></dd>
         </dl>
-        <form method="post" id="reservatieForm">
+        <form method="post" name="reservatieForm">
+
        		<label>Plaatsen:<span>${fouten.van}</span>
-      		<input name='plaatsen' type="number" min="1" max="${voorstelling.vrijePlaatsen}" value="${aantalGereserveerdePlaatsen}" autofocus required /></label>
+      		<input name='plaatsen' type="number" min="1" max="<c:out value="${voorstelling.vrijePlaatsen}" />" value="${aantalGereserveerdePlaatsen}" autofocus required /></label>
       		<input name="maxplaatsen" type="hidden" type="number" value="${voorstelling.vrijePlaatsen}" />
         	<input type="submit" value="Reserveren" id="reservatieKnop" />
         </form>
         <div class='fout'>${fout}</div>  
       </c:otherwise>
     </c:choose>
-	<vdab:formscript formID="reservatieForm" buttonID="reservatieKnop"/>
+	<vdab:formscript formName="reservatieForm" buttonID="reservatieKnop"/>
   </body>
 </html>

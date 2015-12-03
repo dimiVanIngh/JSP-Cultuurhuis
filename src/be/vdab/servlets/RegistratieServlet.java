@@ -1,6 +1,7 @@
 package be.vdab.servlets;
 
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,6 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.sql.DataSource;
 
+import be.vdab.dao.DAOException;
 import be.vdab.dao.KlantDAO;
 import be.vdab.entities.Klant;
 import be.vdab.util.Validator;
@@ -43,13 +45,18 @@ public class RegistratieServlet extends HttpServlet {
 		if (fouten.isEmpty()) {
 			Klant klant = createKlant(request);
 			klant.hashWachtwoord();
-			if(klantDAO.insertKlant(klant)){
+			try {
+				klantDAO.insertKlant(klant);
 				request.getSession().setAttribute("user", klant);
 				response.sendRedirect(response.encodeRedirectURL(String.format(REDIRECT_URL, request.getContextPath())));
-			} else fouten.add("Gebruikersnaam is al in gebruik.");
+			} catch(DAOException ex) {
+				fouten.add("Gebruikersnaam is al in gebruik.");
+				request.setAttribute("fouten", fouten);
+				request.getRequestDispatcher(VIEW).forward(request, response);
+			}
 		} else {
-			request.setAttribute("fouten", fouten);
-			request.getRequestDispatcher(VIEW).forward(request, response);
+		request.setAttribute("fouten", fouten);
+		request.getRequestDispatcher(VIEW).forward(request, response);
 		}
 	}
 		
@@ -65,7 +72,6 @@ public class RegistratieServlet extends HttpServlet {
 		return new Klant(voornaam,familienaam,straat,huisnr,gemeente,postcode,gebruikersnaam,wachtwoord);
 	}
 
-	//TODO test postcode atleast 1 number + max 10 cijfers
 	private void checkVeldenIngevuld(HttpServletRequest request,List<String> fouten){
 		checkVeldIngevuld(request, fouten, "voornaam");
 		checkVeldIngevuld(request, fouten, "familienaam");
