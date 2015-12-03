@@ -19,6 +19,7 @@ public class WinkelmandjeServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private static final String VIEW = "/WEB-INF/JSP/winkelmandje.jsp";
 
+	// geen reservaties -> redirect of lege pagina
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
 		if(session.getAttribute("reservaties") != null){

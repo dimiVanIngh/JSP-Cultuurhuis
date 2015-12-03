@@ -8,6 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import javax.sql.DataSource;
 
 import be.vdab.dao.KlantDAO;
@@ -52,6 +53,13 @@ public class BevestigReservatiesServlet extends HttpServlet {
 	}
 	
 	private void bevestig(HttpServletRequest request, HttpServletResponse response){
-		
+		HttpSession session = request.getSession();
+		if(session.getAttribute("user") != null && session.getAttribute("reservaties") != null){
+			
+		}
+		// checken user en reservaties? zeker user kan al bevestig klikken met enkel reservatie
+		// verminder (update) vrijeplaatsen - succes / fail - alle succes: create reservatie
+			// reservatieDAO create / voorstelling update vrijePlaatsen
+		// transactie? succes: reservatie, anders reservaties kwijt indien stop tussen update en create
 	}
 }
