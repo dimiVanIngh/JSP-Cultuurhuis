@@ -70,7 +70,6 @@ public class ReserverenServlet extends HttpServlet {
 			int plaatsen = Integer.parseInt(request.getParameter("plaatsen"));
 			long id = Long.parseLong(request.getParameter("id"));
 			
-			// TODO hidden vs vragen db, kan aangepast zijn? / andere methode
 			int maxPlaatsen = Integer.parseInt(request.getParameter("maxplaatsen"));
 			if (plaatsen > 0 && plaatsen <= maxPlaatsen) {
 				HttpSession session = request.getSession();

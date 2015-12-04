@@ -6,7 +6,6 @@ public class Adres {
 	private String gemeente;
 	private String postcode;
 	
-	//TODO checken algemene exceptions + custom error?
 	public Adres(String straat, String huisnummer, String gemeente, String postcode) {
 		this.straat = straat;
 		this.huisnummer = huisnummer;
